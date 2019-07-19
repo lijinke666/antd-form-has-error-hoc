@@ -15,7 +15,9 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
   },
   "include": [
     "src/**/*",

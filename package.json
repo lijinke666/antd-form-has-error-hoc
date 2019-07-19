@@ -1,5 +1,5 @@
 {
-  "name": "antd-form-create-hoc",
+  "name": "antd-form-has-error-hoc",
   "version": "0.0.1",
   "description": "A ant-design form enhance high order component",
   "main": "lib/index.js",
@@ -19,18 +19,17 @@
     "src/**/*.{ts,tsx}": [
       "prettier --write",
       "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix",
-      "tsc --noEmit",
       "git add"
     ]
   },
   "author": "Jinke.Li <1359518268@qq.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lijinke666/antd-form-create-hoc"
+    "url": "https://github.com/lijinke666/antd-form-has-error-hoc"
   },
-  "homepage": "https://lijinke666.github.io/antd-form-create-hoc",
+  "homepage": "https://lijinke666.github.io/antd-form-has-error-hoc",
   "bugs": {
-    "url": "https://github.com/lijinke666/antd-form-create-hoc/issues"
+    "url": "https://github.com/lijinke666/antd-form-has-error-hoc/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -39,9 +38,11 @@
     "antd",
     "hoc",
     "rc-form",
+    "antd-form-has-error-hoc",
     "react-form",
     "ant-design",
-    "component"
+    "component",
+    "high order component"
   ],
   "dependencies": {
     "antd": "^3.20.3",

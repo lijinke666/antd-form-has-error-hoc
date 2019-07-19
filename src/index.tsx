@@ -1,28 +1,25 @@
 import * as React from 'react'
 import { Form } from 'antd'
-import { xor, isEmpty, omit } from 'lodash'
+import xor from 'lodash/xor'
+import isEmpty from 'lodash/isEmpty'
+import omit from 'lodash/omit'
 
 const getDisplayName = (component: React.ComponentClass) => {
   return component.displayName || component.name || 'Component'
 }
 
-export interface IAntdFormCreateHocProps {
+export interface IAntdFormHasErrorProps {
   hasError: boolean
 }
 
-interface IAntdFormCreateHocState {
+interface IAntdFormHasErrorProps {
   filterFields: string[]
 }
 
-/**
- * @name AutoBindForm
- * @param needIgnoreFields string[] 需要忽略验证的字段
- * @param {WrappedComponent.defaultFieldsValue} object 表单初始值
- */
-const autoBindForm = (needIgnoreFields: string[] = []) => (
+const withAntdFormHasError = (needIgnoreFields: string[] = []) => (
   WrappedComponent: React.ComponentClass<any>,
 ) => {
-  class AutoBindForm extends WrappedComponent {
+  class AntdFormHasError extends WrappedComponent {
     get hasError() {
       const {
         form: { getFieldsError, isFieldTouched, getFieldValue },
@@ -34,7 +31,7 @@ const autoBindForm = (needIgnoreFields: string[] = []) => (
       let fieldsError = getFieldsError()
 
       const needOmitFields = filterFields
-        .filter((field) => !isFieldTouched(field))
+        .filter((field: string) => !isFieldTouched(field))
         .concat(needIgnoreFields)
       if (!isEmpty(needOmitFields)) {
         fieldsError = omit(fieldsError, needOmitFields)
@@ -50,7 +47,7 @@ const autoBindForm = (needIgnoreFields: string[] = []) => (
 
     static displayName = `HOC(${getDisplayName(WrappedComponent)})`
 
-    state: IAutoBindFormHelpState = {
+    state: IAntdFormHasErrorProps = {
       filterFields: [],
     }
 
@@ -94,15 +91,11 @@ const autoBindForm = (needIgnoreFields: string[] = []) => (
           })
 
         setFields(allFields)
-
-        if (this.props.defaultFieldsValue) {
-          this.props.form.setFieldsValue(this.props.defaultFieldsValue)
-        }
       })
     }
   }
 
-  return Form.create()(AutoBindForm)
+  return Form.create()(AntdFormHasError)
 }
 
-export default autoBindForm
+export default withAntdFormHasError
