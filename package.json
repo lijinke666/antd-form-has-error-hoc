@@ -12,23 +12,16 @@
     "build:demo": "cross-env NODE_ENV=production rimraf example/dist && webpack --env.mode=production --progress --config  ./example/webpack.config.js",
     "demo": "cross-env NODE_ENV=development && webpack-dev-server --progress --inline --hot --config  ./example/webpack.config.js",
     "prepare": "yarn build",
-    "precommit": "lint-staged",
     "type:check": "tsc --noEmit",
     "lint": "prettier --write 'src/**/*.{ts,tsx}' && tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix"
   },
-  "pre-commit": "lint",
   "lint-staged": {
-    "src/**/*.ts": [
+    "src/**/*.{ts,tsx}": [
       "prettier --write",
       "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix",
       "tsc --noEmit",
       "git add"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "author": "Jinke.Li <1359518268@qq.com>",
   "repository": {
@@ -81,5 +74,10 @@
     "webpack": "^4.36.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
