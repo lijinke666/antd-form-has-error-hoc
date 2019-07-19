@@ -51,6 +51,7 @@ const withAntdFormHasError = (needIgnoreFields: string[] = []) => (
       filterFields: [],
     }
 
+    // @ts-ignore
     autoBindFormHelp: React.Component<{}, {}> = null
 
     getFormRef = (formRef: React.Component) => {

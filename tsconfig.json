@@ -6,8 +6,9 @@
       "es7",
       "dom"
     ],
-    "outDir": "./lib/",
+    "outDir": "lib",
     "sourceMap": false,
+    // "declaration": true,
     "noImplicitAny": true,
     "target": "es5",
     "jsx": "react",
@@ -15,7 +16,10 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
-    "moduleResolution": "node",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "include": [
     "./src/**/*",

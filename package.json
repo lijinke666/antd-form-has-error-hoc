@@ -6,7 +6,7 @@
   "scripts": {
     "start": "yarn demo",
     "clean": "rimraf lib && rimraf assets",
-    "build:js": "tsc -p tslint.json",
+    "build:js": "tsc",
     "build": "cross-env NODE_ENV=production && yarn run clean && yarn build:js",
     "build:demo": "cross-env NODE_ENV=production rimraf example/dist && webpack --env.mode=production --progress --config  ./example/webpack.config.js",
     "demo": "cross-env NODE_ENV=development && webpack-dev-server --progress --inline --hot --config  ./example/webpack.config.js",
@@ -15,10 +15,9 @@
     "lint": "prettier --write 'src/**/*.{ts,tsx}' && tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix"
   },
   "lint-staged": {
-    "**/**/*.{ts,tsx}": [
+    "src/**/*.{ts,tsx}": [
       "prettier --write",
       "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix",
-      "tsc --noEmit",
       "git add"
     ]
   },
