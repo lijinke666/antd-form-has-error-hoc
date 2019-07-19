@@ -1,7 +1,7 @@
 # antd-form-has-error-hoc
 
-[![npm](https://img.shields.io/npm/dm/antd-form-create-hoc.svg?style=flat-square)](https://www.npmjs.com/package/antd-form-create-hoc)
-[![npm version](https://img.shields.io/npm/v/antd-form-create-hoc.svg?style=flat-square)](https://badge.fury.io/js/antd-form-create-hoc)
+[![npm](https://img.shields.io/npm/dm/antd-form-has-error-hoc.svg?style=flat-square)](https://www.npmjs.com/package/antd-form-has-error-hoc)
+[![npm version](https://img.shields.io/npm/v/antd-form-has-error-hoc.svg?style=flat-square)](https://badge.fury.io/js/antd-form-has-error-hoc)
 
 A ant-design form enhance high order component , auto collects form errors , you can use `this.props.hasError`
 
