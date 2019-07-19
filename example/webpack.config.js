@@ -1,13 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
+const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PORT = 8081;
 
 module.exports = env => {
-  const mode = (env && env.mode) || 'development';
+  const mode = process.env.NODE_ENV;
   const options = {
-    entry: path.join(__dirname, '../example/example.js'),
+    mode,
+    entry: path.join(__dirname, '../example/index.tsx'),
     output: {
       path: path.join(__dirname, '../example/dist'),
       filename: 'build.js',
@@ -17,13 +19,37 @@ module.exports = env => {
     module: {
       rules: [
         {
-          test: /\.js[x]?$/,
+          test: /\.tsx?$/,
           use: [
             {
-              loader: 'babel-loader'
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+                getCustomTransformers: () => ({
+                  before: [
+                    tsImportPluginFactory([
+                      {
+                        libraryName: 'antd',
+                        libraryDirectory: 'es',
+                        style: true
+                      },
+                      {
+                        style: false,
+                        libraryName: 'lodash',
+                        libraryDirectory: null,
+                        camel2DashComponentName: false
+                      }
+                    ])
+                  ]
+                }),
+                compilerOptions: {
+                  module: 'es2015',
+                  lib: ['es6', 'es7', 'dom']
+                }
+              }
             }
           ],
-          exclude: '/node_modules/'
+          exclude: /node_modules/
         },
         {
           test: /\.less$/,
@@ -31,9 +57,9 @@ module.exports = env => {
             { loader: 'style-loader' },
             {
               loader: 'css-loader',
-              options: { minimize: false, sourceMap: true }
+              options: { importLoaders: 1 }
             },
-            { loader: 'less-loader', options: { sourceMap: true } }
+            { loader: 'less-loader', options: { javascriptEnabled: true } }
           ]
         },
         {
@@ -42,7 +68,7 @@ module.exports = env => {
             { loader: 'style-loader' }, //loader 倒序执行  先执行 less-laoder
             {
               loader: 'css-loader',
-              options: { minimize: false, sourceMap: true }
+              options: { importLoaders: 1 }
             }
           ]
         },
@@ -73,7 +99,7 @@ module.exports = env => {
     //自动补全后缀
     resolve: {
       enforceExtension: false,
-      extensions: ['.js', '.jsx', '.json'],
+      extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
       modules: [path.resolve('src'), path.resolve('.'), 'node_modules']
     },
     devServer: {
@@ -96,11 +122,13 @@ module.exports = env => {
           chunksSortMode: 'none'
         }
       }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }),
       new HtmlWebpackPlugin({
-        title: 'demo',
+        title: 'antd-form-create-hoc',
         filename: 'index.html',
-        template: path.resolve(__dirname, 'index.html'), //模板文件
-        hash: true //添加hash码
+        template: path.resolve(__dirname, 'index.html')
       })
     ]
   };
