@@ -3,11 +3,10 @@
   "version": "0.0.1",
   "description": "A ant-design form enhance high order component",
   "main": "lib/index.js",
-  "typing": "index.d.ts",
   "scripts": {
     "start": "yarn demo",
     "clean": "rimraf lib && rimraf assets",
-    "build:js": "babel src -d lib",
+    "build:js": "tsc -p tslint.json",
     "build": "cross-env NODE_ENV=production && yarn run clean && yarn build:js",
     "build:demo": "cross-env NODE_ENV=production rimraf example/dist && webpack --env.mode=production --progress --config  ./example/webpack.config.js",
     "demo": "cross-env NODE_ENV=development && webpack-dev-server --progress --inline --hot --config  ./example/webpack.config.js",
@@ -16,9 +15,10 @@
     "lint": "prettier --write 'src/**/*.{ts,tsx}' && tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
+    "**/**/*.{ts,tsx}": [
       "prettier --write",
       "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix",
+      "tsc --noEmit",
       "git add"
     ]
   },
@@ -67,7 +67,6 @@
     "ts-import-plugin": "^1.6.1",
     "ts-lint": "^4.5.1",
     "ts-loader": "^6.0.4",
-    "tsc": "^1.20150623.0",
     "tslib": "^1.10.0",
     "tslint": "^5.18.0",
     "tslint-react": "^4.0.0",

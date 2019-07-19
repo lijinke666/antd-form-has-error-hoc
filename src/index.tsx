@@ -12,7 +12,7 @@ export interface IAntdFormHasErrorProps {
   hasError: boolean
 }
 
-interface IAntdFormHasErrorProps {
+interface IAntdFormHasErrorState {
   filterFields: string[]
 }
 
@@ -47,7 +47,7 @@ const withAntdFormHasError = (needIgnoreFields: string[] = []) => (
 
     static displayName = `HOC(${getDisplayName(WrappedComponent)})`
 
-    state: IAntdFormHasErrorProps = {
+    state: IAntdFormHasErrorState = {
       filterFields: [],
     }
 

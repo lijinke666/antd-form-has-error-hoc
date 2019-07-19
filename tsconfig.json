@@ -7,7 +7,7 @@
       "dom"
     ],
     "outDir": "./lib/",
-    "sourceMap": true,
+    "sourceMap": false,
     "noImplicitAny": true,
     "target": "es5",
     "jsx": "react",
@@ -16,10 +16,12 @@
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipDefaultLibCheck": true,
   },
   "include": [
-    "src/**/*",
+    "./src/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

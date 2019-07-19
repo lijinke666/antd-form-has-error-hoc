@@ -31,7 +31,7 @@ online example : [https://lijinke666.github.io/antd-form-has-error-hoc/](https:/
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import withAntdFormHasError, { IAntdFormHasErrorProps } from '../src';
+import withAntdFormHasError, { IAntdFormHasErrorProps } from 'antd-form-has-error-hoc';
 import { Form, Input, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 
