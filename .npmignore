@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+yarn-error.log
+.DS_Store
+dist
+example
+src
+.history
+assetsImg
+index.html
+__tests__
+/.*
+postcss.config.json
+watermark.png
+demo.jpg
+yarn.lock
