@@ -8,7 +8,7 @@ const getDisplayName = (component) => {
   return component.displayName || component.name || 'Component'
 }
 
-const withAntdFormHasError = (needIgnoreFields = []) => (
+const withAntdFormHasError = (needIgnoreFields = [], formCreateOption = {}) => (
   WrappedComponent
 ) => {
   class AntdFormHasError extends WrappedComponent {
@@ -87,7 +87,7 @@ const withAntdFormHasError = (needIgnoreFields = []) => (
     }
   }
 
-  return Form.create()(AntdFormHasError)
+  return Form.create(formCreateOption)(AntdFormHasError)
 }
 
 export default withAntdFormHasError
