@@ -1,23 +1,15 @@
 import * as React from 'react'
-import { Form } from 'antd'
+import Form from "antd/es/Form"
 import xor from 'lodash/xor'
 import isEmpty from 'lodash/isEmpty'
 import omit from 'lodash/omit'
 
-const getDisplayName = (component: React.ComponentClass) => {
+const getDisplayName = (component) => {
   return component.displayName || component.name || 'Component'
 }
 
-export interface IAntdFormHasErrorProps {
-  hasError: boolean
-}
-
-interface IAntdFormHasErrorState {
-  filterFields: string[]
-}
-
-const withAntdFormHasError = (needIgnoreFields: string[] = []) => (
-  WrappedComponent: React.ComponentClass<any>,
+const withAntdFormHasError = (needIgnoreFields = []) => (
+  WrappedComponent
 ) => {
   class AntdFormHasError extends WrappedComponent {
     get hasError() {
@@ -31,7 +23,7 @@ const withAntdFormHasError = (needIgnoreFields: string[] = []) => (
       let fieldsError = getFieldsError()
 
       const needOmitFields = filterFields
-        .filter((field: string) => !isFieldTouched(field))
+        .filter((field) => !isFieldTouched(field))
         .concat(needIgnoreFields)
       if (!isEmpty(needOmitFields)) {
         fieldsError = omit(fieldsError, needOmitFields)
@@ -47,14 +39,13 @@ const withAntdFormHasError = (needIgnoreFields: string[] = []) => (
 
     static displayName = `HOC(${getDisplayName(WrappedComponent)})`
 
-    state: IAntdFormHasErrorState = {
+    state = {
       filterFields: [],
     }
 
-    // @ts-ignore
-    autoBindFormHelp: React.Component<{}, {}> = null
+    autoBindFormHelp = null
 
-    getFormRef = (formRef: React.Component) => {
+    getFormRef = (formRef) => {
       this.autoBindFormHelp = formRef
     }
 
@@ -74,13 +65,13 @@ const withAntdFormHasError = (needIgnoreFields: string[] = []) => (
 
       const fields = Object.keys(getFieldsValue())
 
-      validateFields((err: object) => {
+      validateFields((err) => {
         const filterFields = xor(fields, Object.keys(err || []))
         this.setState({
           filterFields,
         })
 
-        const allFields: { [key: string]: any } = {}
+        const allFields = {}
         fields
           .filter((field) => !filterFields.includes(field))
           .forEach((field) => {

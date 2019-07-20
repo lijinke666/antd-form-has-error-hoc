@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PORT = 8081;
@@ -9,7 +8,7 @@ module.exports = env => {
   const mode = process.env.NODE_ENV;
   const options = {
     mode,
-    entry: path.join(__dirname, '../example/index.tsx'),
+    entry: path.join(__dirname, '../example/index'),
     output: {
       path: path.join(__dirname, '../example/dist'),
       filename: 'build.js',
@@ -19,37 +18,26 @@ module.exports = env => {
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
+          test: /\.js[x]?$/,
           use: [
             {
-              loader: 'ts-loader',
+              loader: 'babel-loader',
               options: {
-                transpileOnly: true,
-                getCustomTransformers: () => ({
-                  before: [
-                    tsImportPluginFactory([
-                      {
-                        libraryName: 'antd',
-                        libraryDirectory: 'es',
-                        style: true
-                      },
-                      {
-                        style: false,
-                        libraryName: 'lodash',
-                        libraryDirectory: null,
-                        camel2DashComponentName: false
-                      }
-                    ])
+                plugins: [
+                  [
+                    'babel-plugin-import',
+                    {
+                      libraryName: 'antd',
+                      libraryDirectory: 'es',
+                      style: true
+                    },
+                    'antd'
                   ]
-                }),
-                compilerOptions: {
-                  module: 'es2015',
-                  lib: ['es6', 'es7', 'dom']
-                }
+                ]
               }
             }
           ],
-          exclude: /node_modules/
+          exclude: '/node_modules/'
         },
         {
           test: /\.less$/,
