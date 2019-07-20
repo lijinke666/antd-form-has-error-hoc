@@ -133,6 +133,13 @@ class App extends PureComponent<Props> {
 }
 ```
 
+## Api
+
+```
+// FormCreateOption: https://ant.design/components/form-cn/#Form.create(options)
+@withAntdFormHasError(needIgnoreFields?: string[], formCreateOption?: FormCreateOption)
+```
+
 ## Development
 
 ```
