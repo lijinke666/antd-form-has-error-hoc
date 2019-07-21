@@ -46,7 +46,7 @@ class App extends PureComponent<Props> {
       <Form>
         <Form.Item>
           {getFieldDecorator('username', {
-            // if set required true the hoc is ignore the field error
+            // if set required true the hoc is get the field error
             rules: [{ required: true, message: 'Please input your username!' }]
           })(<Input placeholder="Username" />)}
         </Form.Item>
