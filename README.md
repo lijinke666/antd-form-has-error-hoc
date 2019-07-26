@@ -37,6 +37,7 @@ import { FormComponentProps } from 'antd/lib/form';
 
 type Props = IAntdFormHasErrorProps & FormComponentProps;
 
+@Form.create()
 @withAntdFormHasError()
 class App extends PureComponent<Props> {
   render() {
@@ -75,6 +76,7 @@ class App extends PureComponent<Props> {
 
 // for edit
 
+@Form.create()
 @withAntdFormHasError()
 class App extends PureComponent<Props> {
   render() {
@@ -108,6 +110,7 @@ class App extends PureComponent<Props> {
 
 // for ignore
 
+@Form.create()
 @withAntdFormHasError(['username','password'])
 class App extends PureComponent<Props> {
   render() {
@@ -136,8 +139,7 @@ class App extends PureComponent<Props> {
 ## Api
 
 ```
-// FormCreateOption: https://ant.design/components/form-cn/#Form.create(options)
-@withAntdFormHasError(needIgnoreFields?: string[], formCreateOption?: FormCreateOption)
+@withAntdFormHasError(needIgnoreFields?: string[])
 ```
 
 ## Development

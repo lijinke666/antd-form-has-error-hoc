@@ -11,6 +11,7 @@ const formStyles = {
   padding: 30,
 }
 
+@Form.create()
 @withAntdFormHasError()
 class CreateForm extends PureComponent {
   render() {
@@ -42,6 +43,7 @@ class CreateForm extends PureComponent {
   }
 }
 
+@Form.create()
 @withAntdFormHasError()
 class EditForm extends PureComponent {
   render() {
@@ -79,6 +81,7 @@ class EditForm extends PureComponent {
   }
 }
 
+@Form.create()
 @withAntdFormHasError(['phone'])
 class IgnoreForm extends PureComponent {
   render() {

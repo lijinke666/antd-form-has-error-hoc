@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Form from 'antd/lib/Form'
 import xor from 'lodash/xor'
 import isEmpty from 'lodash/isEmpty'
 import omit from 'lodash/omit'
@@ -9,8 +8,7 @@ const getDisplayName = component => {
 }
 
 const withAntdFormHasError = (
-  needIgnoreFields = [],
-  formCreateOption = {}
+  needIgnoreFields = []
 ) => WrappedComponent => {
   class AntdFormHasError extends WrappedComponent {
     get hasError() {
@@ -88,7 +86,7 @@ const withAntdFormHasError = (
     }
   }
 
-  return Form.create(formCreateOption)(AntdFormHasError)
+  return AntdFormHasError
 }
 
 export default withAntdFormHasError

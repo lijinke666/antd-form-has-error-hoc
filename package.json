@@ -1,6 +1,6 @@
 {
   "name": "antd-form-has-error-hoc",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A ant-design form enhance high order component",
   "main": "lib/index.js",
   "typing": "index.d.ts",
@@ -52,8 +52,10 @@
     "high order component"
   ],
   "dependencies": {
-    "antd": "^3.20.3",
     "lodash": "^4.17.14"
+  },
+  "peerDependencies": {
+    "antd": ">=3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.5.5",
@@ -82,6 +84,7 @@
     "@types/lodash": "^4.14.136",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
+    "antd": "^3.20.7",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^24.8.0",
