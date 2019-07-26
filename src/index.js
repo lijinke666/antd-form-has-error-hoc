@@ -1,21 +1,22 @@
 import * as React from 'react'
-import Form from "antd/es/Form"
+import Form from 'antd/lib/Form'
 import xor from 'lodash/xor'
 import isEmpty from 'lodash/isEmpty'
 import omit from 'lodash/omit'
 
-const getDisplayName = (component) => {
+const getDisplayName = component => {
   return component.displayName || component.name || 'Component'
 }
 
-const withAntdFormHasError = (needIgnoreFields = [], formCreateOption = {}) => (
-  WrappedComponent
-) => {
+const withAntdFormHasError = (
+  needIgnoreFields = [],
+  formCreateOption = {}
+) => WrappedComponent => {
   class AntdFormHasError extends WrappedComponent {
     get hasError() {
       const {
         form: { getFieldsError, isFieldTouched, getFieldValue },
-        defaultFieldsValue,
+        defaultFieldsValue
       } = this.props
 
       const { filterFields } = this.state
@@ -23,13 +24,13 @@ const withAntdFormHasError = (needIgnoreFields = [], formCreateOption = {}) => (
       let fieldsError = getFieldsError()
 
       const needOmitFields = filterFields
-        .filter((field) => !isFieldTouched(field))
+        .filter(field => !isFieldTouched(field))
         .concat(needIgnoreFields)
       if (!isEmpty(needOmitFields)) {
         fieldsError = omit(fieldsError, needOmitFields)
       }
 
-      return Object.keys(fieldsError).some((field) => {
+      return Object.keys(fieldsError).some(field => {
         const isCheckFieldTouched = !isEdit || isEmpty(getFieldValue(field))
         return isCheckFieldTouched
           ? !isFieldTouched(field) || fieldsError[field]
@@ -40,12 +41,12 @@ const withAntdFormHasError = (needIgnoreFields = [], formCreateOption = {}) => (
     static displayName = `HOC(${getDisplayName(WrappedComponent)})`
 
     state = {
-      filterFields: [],
+      filterFields: []
     }
 
     autoBindFormHelp = null
 
-    getFormRef = (formRef) => {
+    getFormRef = formRef => {
       this.autoBindFormHelp = formRef
     }
 
@@ -60,25 +61,25 @@ const withAntdFormHasError = (needIgnoreFields = [], formCreateOption = {}) => (
     }
     componentDidMount() {
       const {
-        form: { validateFields, getFieldsValue, getFieldValue, setFields },
+        form: { validateFields, getFieldsValue, getFieldValue, setFields }
       } = this.props
 
       const fields = Object.keys(getFieldsValue())
 
-      validateFields((err) => {
+      validateFields(err => {
         const filterFields = xor(fields, Object.keys(err || []))
         this.setState({
-          filterFields,
+          filterFields
         })
 
         const allFields = {}
         fields
-          .filter((field) => !filterFields.includes(field))
-          .forEach((field) => {
+          .filter(field => !filterFields.includes(field))
+          .forEach(field => {
             allFields[field] = {
               value: getFieldValue(field),
               errors: null,
-              status: null,
+              status: null
             }
           })
 
