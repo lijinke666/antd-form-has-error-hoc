@@ -1,15 +1,16 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { getDisplayName, xor, isEmpty, omit } from './utils'
 
-const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
-  const AntdFormHasError = () => {
+const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
+  const AntdFormHasError = props => {
+    const [filterFields, setFilterFields] = useState([])
+
     const hasError = useMemo(() => {
       const {
         form: { getFieldsError, isFieldTouched, getFieldValue },
         defaultFieldsValue
-      } = this.props
+      } = props
 
-      const { filterFields } = this.state
       const isEdit = !!defaultFieldsValue
       let fieldsError = getFieldsError()
 
@@ -26,7 +27,8 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
           ? !isFieldTouched(field) || fieldsError[field]
           : fieldsError[field]
       })
-    })
+    }, [filterFields, props])
+
     useEffect(() => {
       const {
         form: { validateFields, getFieldsValue, getFieldValue, setFields }
@@ -36,9 +38,7 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
 
       validateFields(err => {
         const filterFields = xor(fields, Object.keys(err || []))
-        this.setState({
-          filterFields
-        })
+        setFilterFields(filterFields)
 
         const allFields = {}
         fields
@@ -63,4 +63,4 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
   return AntdFormHasError
 }
 
-export default AntdFormHasErrorForClass
+export default AntdFormHasErrorForFunction

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import withAntdFormHasError from '../src'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Checkbox } from 'antd'
 
 const formStyles = {
   border: '1px solid #dcdcdc',
@@ -117,11 +117,66 @@ class IgnoreForm extends PureComponent {
   }
 }
 
+@Form.create()
+@withAntdFormHasError()
+class DynamicForm extends PureComponent {
+  state = {
+    required: true
+  }
+  onToggleRequired = e => {
+    this.setState({
+      required: e.target.checked
+    },()=>{
+      this.props.form.resetFields(['password'])
+    })
+  }
+  render() {
+    const { required } = this.state
+    const { getFieldDecorator } = this.props.form
+    return (
+      <Form style={formStyles}>
+        <h2>Dynamic Form </h2>
+        <Form.Item>
+          {getFieldDecorator('username', {
+            rules: [
+              { required: required, message: 'Please input your username!' }
+            ]
+          })(<Input placeholder="Username" />)}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('password', {
+            rules: [
+              { required: required, message: 'Please input your Password!' }
+            ]
+          })(<Input type="password" placeholder="Password" />)}
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={this.props.hasError}
+          >
+            Log in
+          </Button>
+          <Checkbox
+            style={{ marginLeft: 20 }}
+            checked={required}
+            onChange={this.onToggleRequired}
+          >
+            required
+          </Checkbox>
+        </Form.Item>
+      </Form>
+    )
+  }
+}
+
 const Demo = () => (
   <div>
     <CreateForm />
     <EditForm />
     <IgnoreForm />
+    <DynamicForm/>
   </div>
 )
 
