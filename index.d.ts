@@ -7,7 +7,9 @@ export interface IAntdFormHasErrorState {
 }
 
 export interface IAntdFormHasErrorProps {
-  hasError: boolean
+  hasError?: boolean;
+  resetFieldsStatus?: () => void;
+  defaultFieldsValue?: object
 }
 
 export default function withAntdFormHasError<T extends FormComponentProps<any>>(
