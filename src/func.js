@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { getDisplayName, xor, isEmpty, omit } from './utils'
 
 const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
@@ -29,7 +29,11 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
       })
     }, [filterFields, props])
 
-    useEffect(() => {
+    const resetFieldsStatus = useCallback(() => {
+      this.setFieldsStatus()
+    }, [])
+
+    const setFieldsStatus = useCallback(() => {
       const {
         form: { validateFields, getFieldsValue, getFieldValue, setFields }
       } = props
@@ -52,9 +56,20 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
           })
 
         setFields(allFields)
+      }, [])
+
+      useEffect(() => {
+        setFieldsStatus()
       })
     }, [])
-    return <WrappedComponent {...props} hasError={hasError} />
+
+    return (
+      <WrappedComponent
+        {...props}
+        hasError={hasError}
+        resetFieldsStatus={resetFieldsStatus}
+      />
+    )
   }
   AntdFormHasError.prototype.displayName = `HOC(${getDisplayName(
     WrappedComponent
