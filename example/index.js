@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import withAntdFormHasError from '../src'
-import { Form, Input, Button, Checkbox } from 'antd'
+import { Form, Input, Button, Checkbox, Divider } from 'antd'
 
 const formStyles = {
   border: '1px solid #dcdcdc',
@@ -121,35 +121,58 @@ class IgnoreForm extends PureComponent {
 @withAntdFormHasError()
 class DynamicForm extends PureComponent {
   state = {
-    required: true
+    visible: true,
+    fields: []
   }
-  onToggleRequired = e => {
+  onToggleVisible = e => {
+    this.setState(
+      {
+        visible: e.target.checked
+      },
+      () => {
+        this.props.resetFieldsStatus()
+      }
+    )
+  }
+  addFields = () => {
     this.setState({
-      required: e.target.checked
-    },()=>{
-      this.props.form.resetFields(['password'])
+      fields: [...this.state.fields, 1]
+    }, () => {
+      this.props.resetFieldsStatus()
     })
   }
   render() {
-    const { required } = this.state
+    const { visible, fields } = this.state
     const { getFieldDecorator } = this.props.form
     return (
       <Form style={formStyles}>
-        <h2>Dynamic Form </h2>
+        <h2>Dynamic Form</h2>
         <Form.Item>
           {getFieldDecorator('username', {
-            rules: [
-              { required: required, message: 'Please input your username!' }
-            ]
+            rules: [{ required: true, message: 'Please input your username!' }]
           })(<Input placeholder="Username" />)}
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('password', {
-            rules: [
-              { required: required, message: 'Please input your Password!' }
-            ]
+            rules: [{ required: true, message: 'Please input your Password!' }]
           })(<Input type="password" placeholder="Password" />)}
         </Form.Item>
+        {visible && (
+          <Form.Item>
+            {getFieldDecorator('phone', {
+              rules: [{ required: true, message: 'Please input your Phone!' }]
+            })(<Input type="text" placeholder="phone" />)}
+          </Form.Item>
+        )}
+        {fields.map((_, index) => {
+          return (
+            <Form.Item key={index}>
+              {getFieldDecorator(`field-${index}`, {
+                rules: [{ required: true, message: 'required' }]
+              })(<Input type="text" placeholder="phone" />)}
+            </Form.Item>
+          )
+        })}
         <Form.Item>
           <Button
             type="primary"
@@ -160,11 +183,14 @@ class DynamicForm extends PureComponent {
           </Button>
           <Checkbox
             style={{ marginLeft: 20 }}
-            checked={required}
-            onChange={this.onToggleRequired}
+            checked={visible}
+            onChange={this.onToggleVisible}
           >
-            required
+            toggle phone visible
           </Checkbox>
+          <Button type="link" onClick={this.addFields}>
+            Add Fields
+          </Button>
         </Form.Item>
       </Form>
     )
@@ -173,10 +199,19 @@ class DynamicForm extends PureComponent {
 
 const Demo = () => (
   <div>
+    <Divider orientation="left">
+      <Button
+        type="link"
+        href="https://github.com/lijinke666/antd-form-has-error-hoc"
+        target="_blank"
+      >
+        Source Code
+      </Button>
+    </Divider>
     <CreateForm />
     <EditForm />
     <IgnoreForm />
-    <DynamicForm/>
+    <DynamicForm />
   </div>
 )
 

@@ -46,10 +46,14 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
           wrappedComponentRef={this.getFormRef}
           {...this.props}
           hasError={this.hasError}
+          resetFieldsStatus={this.resetFieldsStatus}
         />
       )
     }
-    componentDidMount() {
+    resetFieldsStatus = () => {
+      this.setFieldsStatus()
+    }
+    setFieldsStatus = () => {
       const {
         form: { validateFields, getFieldsValue, getFieldValue, setFields }
       } = this.props
@@ -75,6 +79,9 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
 
         setFields(allFields)
       })
+    }
+    componentDidMount() {
+      this.setFieldsStatus()
     }
   }
   return AntdFormHasError
