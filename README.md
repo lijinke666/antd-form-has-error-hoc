@@ -222,19 +222,37 @@ class DynamicForm extends PureComponent {
 }
 ```
 
+## Parent component
+
+```jsx
+class ParentComponent extends PureComponent {
+  render() {
+    // if use `withAntdFormHasError` wrapper component in parent component
+    // use `defaultFieldsValue` fill form item fields
+    const defaultFieldsValue = {
+      username: 'test user name',
+      password: 123456
+    }
+    return (
+      <CreateForm defaultFieldsValue={defaultFieldsValue}/>
+    )
+  }
+}
+```
+
 ## Api
 
-```
+```js
 @withAntdFormHasError(needIgnoreFields?: string[])
 
 this.props.hasError
-
+this.props.defaultFieldsValue
 this.props.resetFieldsStatus()
 ```
 
 ## Development
 
-```
+```bash
 git clone https://github.com/lijinke666/antd-form-has-error-hoc.git
 npm install
 npm start

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getDisplayName, xor, isEmpty, omit } from './utils'
+import { getDisplayName, xor, isEmpty, omit, isEqual } from './utils'
 
 const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
   class AntdFormHasError extends WrappedComponent {
@@ -65,23 +65,49 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
         this.setState({
           filterFields
         })
-
         const allFields = {}
         fields
           .filter(field => !filterFields.includes(field))
           .forEach(field => {
+            const value = getFieldValue(field)
             allFields[field] = {
-              value: getFieldValue(field),
+              value,
               errors: null,
-              status: null
+              status: null,
+              touched: !!value
             }
           })
 
         setFields(allFields)
       })
     }
+
+    setDefaultFieldsValue = (
+      defaultFieldsValue = this.props.defaultFieldsValue
+    ) => {
+      const { form } = this.props
+      if (defaultFieldsValue) {
+        const allFields = {}
+        Object.keys(defaultFieldsValue).forEach(field => {
+          allFields[field] = {
+            value: defaultFieldsValue[field],
+            errors: null,
+            status: null,
+            touched: true
+          }
+        })
+
+        form.setFields(allFields)
+      }
+    }
     componentDidMount() {
       this.setFieldsStatus()
+      this.setDefaultFieldsValue()
+    }
+    componentDidUpdate(nextProps) {
+      if (!isEqual(nextProps.defaultFieldsValue, this.props.defaultFieldsValue)) {
+        this.setDefaultFieldsValue(nextProps.defaultFieldsValue)
+      }
     }
   }
   return AntdFormHasError

@@ -197,6 +197,18 @@ class DynamicForm extends PureComponent {
   }
 }
 
+class ParentComponent extends PureComponent {
+  render() {
+    const defaultFieldsValue = {
+      username: 'test user name',
+      password: 123456
+    }
+    return (
+      <CreateForm defaultFieldsValue={defaultFieldsValue}/>
+    )
+  }
+}
+
 const Demo = () => (
   <div>
     <Divider orientation="left">
@@ -212,6 +224,7 @@ const Demo = () => (
     <EditForm />
     <IgnoreForm />
     <DynamicForm />
+    <ParentComponent/>
   </div>
 )
 

@@ -29,10 +29,6 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
       })
     }, [filterFields, props])
 
-    const resetFieldsStatus = useCallback(() => {
-      this.setFieldsStatus()
-    }, [])
-
     const setFieldsStatus = useCallback(() => {
       const {
         form: { validateFields, getFieldsValue, getFieldValue, setFields }
@@ -48,20 +44,48 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
         fields
           .filter(field => !filterFields.includes(field))
           .forEach(field => {
+            const value = getFieldValue(field)
             allFields[field] = {
-              value: getFieldValue(field),
+              value,
               errors: null,
-              status: null
+              status: null,
+              touched: !!value
             }
           })
 
         setFields(allFields)
-      }, [])
-
-      useEffect(() => {
-        setFieldsStatus()
       })
     }, [])
+
+    const resetFieldsStatus = useCallback(() => {
+      setFieldsStatus()
+    }, [])
+
+    const setDefaultFieldsValue = useCallback(() => {
+      const { form } = props
+      if (defaultFieldsValue) {
+        const allFields = {}
+        Object.keys(defaultFieldsValue).forEach(field => {
+          allFields[field] = {
+            value: defaultFieldsValue[field],
+            errors: null,
+            status: null,
+            touched: true
+          }
+        })
+
+        form.setFields(allFields)
+      }
+    }, [defaultFieldsValue])
+
+    useEffect(() => {
+      setFieldsStatus()
+      setDefaultFieldsValue()
+    })
+
+    useEffect(() => {
+      setDefaultFieldsValue()
+    }, [props.defaultFieldsValue])
 
     return (
       <WrappedComponent
