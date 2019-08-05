@@ -11,20 +11,19 @@ disabled your submit button, effectively reduce the amount of code
 
 using `yarn` :
 
-```
+```bash
 yarn add antd-form-has-error-hoc
 ```
 
 using `npm` :
 
-```
+```bash
 npm install antd-form-has-error-hoc --save
 ```
 
 ## Example
 
 online example : [https://lijinke666.github.io/antd-form-has-error-hoc/](https://lijinke666.github.io/antd-form-has-error-hoc/)
-
 
 ## Usage
 
@@ -233,8 +232,13 @@ class ParentComponent extends PureComponent {
       username: 'test user name',
       password: 123456
     }
+
+    // get antd form ref
+    const getRef = (form) => {
+      console.log(form)
+    }
     return (
-      <CreateForm defaultFieldsValue={defaultFieldsValue}/>
+      <CreateForm defaultFieldsValue={defaultFieldsValue} wrappedComponentRef={getRef}/>
     )
   }
 }

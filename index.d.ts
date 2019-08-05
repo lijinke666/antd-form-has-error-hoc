@@ -1,17 +1,23 @@
-import * as React from 'react';
-import { FormComponentProps } from 'antd/lib/Form';
-import { FormWrappedProps } from 'antd/es/Form/interface';
+import * as React from 'react'
+import { FormComponentProps } from 'antd/lib/Form'
+import { FormWrappedProps } from 'antd/lib/Form/interface'
+import { RcBaseFormProps } from 'antd/lib/form/Form'
 
 export interface IAntdFormHasErrorState {
   filterFields: string[]
 }
 
-export interface IAntdFormHasErrorProps {
-  hasError?: boolean;
-  resetFieldsStatus?: () => void;
+export interface IAntdFormHasErrorProps extends RcBaseFormProps {
+  hasError?: boolean
+  resetFieldsStatus?: () => void
   defaultFieldsValue?: object
 }
 
+export interface IWithAntdFormHasErrorOptions {
+  withRef?: boolean
+}
+
 export default function withAntdFormHasError<T extends FormComponentProps<any>>(
-  needIgnoreFields?: string[]
-) : FormWrappedProps<T & IAntdFormHasErrorProps>
+  needIgnoreFields?: string[],
+  options?: IWithAntdFormHasErrorOptions
+): FormWrappedProps<T & IAntdFormHasErrorProps>

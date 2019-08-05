@@ -87,19 +87,24 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
       setDefaultFieldsValue()
     }, [props.defaultFieldsValue])
 
+    const { forwardRef, wrappedComponentRef, ...rest } = props
     return (
       <WrappedComponent
-        {...props}
+        {...rest}
+        wrappedComponentRef={wrappedComponentRef}
         hasError={hasError}
         resetFieldsStatus={resetFieldsStatus}
+        ref={forwardRef}
       />
     )
   }
-  AntdFormHasError.prototype.displayName = `HOC(${getDisplayName(
+  AntdFormHasError.prototype.displayName = `AntdFormHasError(${getDisplayName(
     WrappedComponent
   )})`
 
-  return AntdFormHasError
+  return React.forwardRef((props, ref) => {
+    return <AntdFormHasError {...props} forwardRef={ref} />
+  })
 }
 
 export default AntdFormHasErrorForFunction

@@ -28,25 +28,21 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
       })
     }
 
-    static displayName = `HOC(${getDisplayName(WrappedComponent)})`
+    static displayName = `AntdFormHasError(${getDisplayName(WrappedComponent)})`
 
     state = {
       filterFields: []
     }
 
-    autoBindFormHelp = null
-
-    getFormRef = formRef => {
-      this.autoBindFormHelp = formRef
-    }
-
     render() {
+      const { forwardRef, wrappedComponentRef, ...rest } = this.props
       return (
         <WrappedComponent
-          wrappedComponentRef={this.getFormRef}
-          {...this.props}
+          wrappedComponentRef={wrappedComponentRef}
+          {...rest}
           hasError={this.hasError}
           resetFieldsStatus={this.resetFieldsStatus}
+          ref={forwardRef}
         />
       )
     }
@@ -105,12 +101,17 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
       this.setDefaultFieldsValue()
     }
     componentDidUpdate(nextProps) {
-      if (!isEqual(nextProps.defaultFieldsValue, this.props.defaultFieldsValue)) {
+      if (
+        !isEqual(nextProps.defaultFieldsValue, this.props.defaultFieldsValue)
+      ) {
         this.setDefaultFieldsValue(nextProps.defaultFieldsValue)
       }
     }
   }
-  return AntdFormHasError
+
+  return React.forwardRef((props, ref) => {
+    return <AntdFormHasError {...props} forwardRef={ref} />
+  })
 }
 
 export default AntdFormHasErrorForClass

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import withAntdFormHasError from '../src'
 import { Form, Input, Button, Checkbox, Divider } from 'antd'
@@ -135,11 +135,14 @@ class DynamicForm extends PureComponent {
     )
   }
   addFields = () => {
-    this.setState({
-      fields: [...this.state.fields, 1]
-    }, () => {
-      this.props.resetFieldsStatus()
-    })
+    this.setState(
+      {
+        fields: [...this.state.fields, 1]
+      },
+      () => {
+        this.props.resetFieldsStatus()
+      }
+    )
   }
   render() {
     const { visible, fields } = this.state
@@ -203,29 +206,29 @@ class ParentComponent extends PureComponent {
       username: 'test user name',
       password: 123456
     }
-    return (
-      <CreateForm defaultFieldsValue={defaultFieldsValue}/>
-    )
+    return <CreateForm defaultFieldsValue={defaultFieldsValue} />
   }
 }
 
-const Demo = () => (
-  <div>
-    <Divider orientation="left">
-      <Button
-        type="link"
-        href="https://github.com/lijinke666/antd-form-has-error-hoc"
-        target="_blank"
-      >
-        Source Code
-      </Button>
-    </Divider>
-    <CreateForm />
-    <EditForm />
-    <IgnoreForm />
-    <DynamicForm />
-    <ParentComponent/>
-  </div>
-)
+const Demo = () => {
+  return (
+    <div>
+      <Divider orientation="left">
+        <Button
+          type="link"
+          href="https://github.com/lijinke666/antd-form-has-error-hoc"
+          target="_blank"
+        >
+          Source Code
+        </Button>
+      </Divider>
+      <CreateForm />
+      <EditForm />
+      <IgnoreForm />
+      <DynamicForm />
+      <ParentComponent />
+    </div>
+  )
+}
 
 ReactDOM.render(<Demo />, document.getElementById('root'))
