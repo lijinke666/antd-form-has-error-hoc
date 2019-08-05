@@ -81,7 +81,7 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
     useEffect(() => {
       setFieldsStatus()
       setDefaultFieldsValue()
-    })
+    }, [])
 
     useEffect(() => {
       setDefaultFieldsValue()
