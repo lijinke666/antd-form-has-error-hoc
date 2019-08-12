@@ -1,4 +1,4 @@
-import React, { PureComponent, useRef } from 'react'
+import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import withAntdFormHasError from '../src'
 import { Form, Input, Button, Checkbox, Divider } from 'antd'
