@@ -1,11 +1,11 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const PORT = 8081;
+const PORT = 8082
 
 module.exports = env => {
-  const mode = process.env.NODE_ENV;
+  const mode = process.env.NODE_ENV
   const options = {
     mode,
     entry: path.join(__dirname, '../example/index'),
@@ -53,7 +53,7 @@ module.exports = env => {
         {
           test: /\.css$/,
           use: [
-            { loader: 'style-loader' }, //loader 倒序执行  先执行 less-laoder
+            { loader: 'style-loader' },
             {
               loader: 'css-loader',
               options: { importLoaders: 1 }
@@ -119,6 +119,6 @@ module.exports = env => {
         template: path.resolve(__dirname, 'index.html')
       })
     ]
-  };
-  return options;
-};
+  }
+  return options
+}

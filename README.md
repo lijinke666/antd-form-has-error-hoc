@@ -151,9 +151,9 @@ class DynamicForm extends PureComponent {
         visible: e.target.checked
       },
       () => {
-        // form item dynamic increase or reduce you can call `this.props.resetFieldsStatus()`
+        // form item dynamic increase or reduce you can call `this.props.updateFieldsStatus()`
         // get new `this.props.hasError`
-        this.props.resetFieldsStatus()
+        this.props.updateFieldsStatus()
       }
     )
   }
@@ -161,7 +161,7 @@ class DynamicForm extends PureComponent {
     this.setState({
       fields: [...this.state.fields, 1]
     }, () => {
-      this.props.resetFieldsStatus()
+      this.props.updateFieldsStatus()
     })
   }
   render() {
@@ -251,7 +251,7 @@ class ParentComponent extends PureComponent {
 
 this.props.hasError
 this.props.defaultFieldsValue
-this.props.resetFieldsStatus()
+this.props.updateFieldsStatus()
 ```
 
 ## Development

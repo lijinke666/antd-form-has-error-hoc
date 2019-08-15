@@ -41,12 +41,12 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
           wrappedComponentRef={wrappedComponentRef}
           {...rest}
           hasError={this.hasError}
-          resetFieldsStatus={this.resetFieldsStatus}
+          updateFieldsStatus={this.updateFieldsStatus}
           ref={forwardRef}
         />
       )
     }
-    resetFieldsStatus = () => {
+    updateFieldsStatus = () => {
       this.setFieldsStatus()
     }
     setFieldsStatus = () => {

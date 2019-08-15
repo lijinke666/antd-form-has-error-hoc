@@ -130,7 +130,7 @@ class DynamicForm extends PureComponent {
         visible: e.target.checked
       },
       () => {
-        this.props.resetFieldsStatus()
+        this.props.updateFieldsStatus()
       }
     )
   }
@@ -140,7 +140,7 @@ class DynamicForm extends PureComponent {
         fields: [...this.state.fields, 1]
       },
       () => {
-        this.props.resetFieldsStatus()
+        this.props.updateFieldsStatus()
       }
     )
   }

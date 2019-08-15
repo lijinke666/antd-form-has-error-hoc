@@ -7,17 +7,13 @@ export interface IAntdFormHasErrorState {
   filterFields: string[]
 }
 
-export interface IAntdFormHasErrorProps extends RcBaseFormProps {
+export interface IAntdFormHasErrorProps<T extends object = object>
+  extends RcBaseFormProps {
   hasError?: boolean
-  resetFieldsStatus?: () => void
-  defaultFieldsValue?: object
-}
-
-export interface IWithAntdFormHasErrorOptions {
-  withRef?: boolean
+  updateFieldsStatus?: () => void
+  defaultFieldsValue?: T
 }
 
 export default function withAntdFormHasError<T extends FormComponentProps<any>>(
-  needIgnoreFields?: string[],
-  options?: IWithAntdFormHasErrorOptions
+  needIgnoreFields?: string[]
 ): FormWrappedProps<T & IAntdFormHasErrorProps>

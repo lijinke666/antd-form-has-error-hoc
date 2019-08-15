@@ -57,7 +57,7 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
       })
     }, [])
 
-    const resetFieldsStatus = useCallback(() => {
+    const updateFieldsStatus = useCallback(() => {
       setFieldsStatus()
     }, [])
 
@@ -93,7 +93,7 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
         {...rest}
         wrappedComponentRef={wrappedComponentRef}
         hasError={hasError}
-        resetFieldsStatus={resetFieldsStatus}
+        updateFieldsStatus={updateFieldsStatus}
         ref={forwardRef}
       />
     )
