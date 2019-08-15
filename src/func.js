@@ -1,10 +1,17 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
-import { getDisplayName, xor, isEmpty, omit } from './utils'
+import { getDisplayName, xor, isEmpty, omit, isFunction } from './utils'
 
 const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
   const AntdFormHasError = props => {
     const [filterFields, setFilterFields] = useState([])
     const [lastFields, setLastFields] = useState([])
+
+    const getIgnoreFields = useCallback(ignoreFields => {
+      const fields = Object.keys(props.form.getFieldsValue())
+      return isFunction(ignoreFields)
+        ? ignoreFields(fields) || []
+        : ignoreFields
+    }, [])
 
     const hasError = useMemo(() => {
       const {
@@ -17,7 +24,7 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
 
       const needOmitFields = filterFields
         .filter(field => !isFieldTouched(field))
-        .concat(needIgnoreFields)
+        .concat(getIgnoreFields(needIgnoreFields))
       if (!isEmpty(needOmitFields)) {
         fieldsError = omit(fieldsError, needOmitFields)
       }

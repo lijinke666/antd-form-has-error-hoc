@@ -1,5 +1,12 @@
 import React from 'react'
-import { getDisplayName, xor, isEmpty, omit, isEqual } from './utils'
+import {
+  getDisplayName,
+  xor,
+  isEmpty,
+  omit,
+  isEqual,
+  isFunction
+} from './utils'
 
 const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
   class AntdFormHasError extends WrappedComponent {
@@ -15,7 +22,8 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
 
       const needOmitFields = filterFields
         .filter(field => !isFieldTouched(field))
-        .concat(needIgnoreFields)
+        .concat(this.getIgnoreFields(needIgnoreFields))
+
       if (!isEmpty(needOmitFields)) {
         fieldsError = omit(fieldsError, needOmitFields)
       }
@@ -26,6 +34,10 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
           ? !isFieldTouched(field) || fieldsError[field]
           : fieldsError[field]
       })
+    }
+
+    get fields() {
+      return Object.keys(this.props.form.getFieldsValue())
     }
 
     static displayName = `AntdFormHasError(${getDisplayName(WrappedComponent)})`
@@ -47,9 +59,17 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
         />
       )
     }
+
+    getIgnoreFields = needIgnoreFields => {
+      return isFunction(needIgnoreFields)
+        ? needIgnoreFields(this.fields) || []
+        : needIgnoreFields
+    }
+
     updateFieldsStatus = () => {
       this.setFieldsStatus()
     }
+
     setFieldsStatus = () => {
       const {
         form: {
@@ -63,7 +83,7 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
 
       const { lastFields } = this.state
 
-      const fields = Object.keys(getFieldsValue())
+      const fields = this.fields
       const fieldsError = getFieldsError()
 
       validateFields(() => {

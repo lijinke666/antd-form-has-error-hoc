@@ -1,6 +1,6 @@
 {
   "name": "antd-form-has-error-hoc",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A ant-design form enhance high order component",
   "main": "lib/index.js",
   "typing": "index.d.ts",

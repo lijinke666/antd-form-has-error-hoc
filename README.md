@@ -111,6 +111,7 @@ class App extends PureComponent<Props> {
 
 @Form.create()
 @withAntdFormHasError(['username','password'])
+// or @withAntdFormHasError((fields)=> fields.slice(0,2))
 class App extends PureComponent<Props> {
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -247,7 +248,7 @@ class ParentComponent extends PureComponent {
 ## Api
 
 ```js
-@withAntdFormHasError(needIgnoreFields?: string[])
+@withAntdFormHasError(needIgnoreFields?: string[] | (fields: string[]) => string[])
 
 this.props.hasError
 this.props.defaultFieldsValue

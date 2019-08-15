@@ -5,6 +5,7 @@ import { RcBaseFormProps } from 'antd/lib/form/Form'
 
 export interface IAntdFormHasErrorState {
   filterFields: string[]
+  lastFields: string[]
 }
 
 export interface IAntdFormHasErrorProps<T extends object = object>
@@ -15,5 +16,5 @@ export interface IAntdFormHasErrorProps<T extends object = object>
 }
 
 export default function withAntdFormHasError<T extends FormComponentProps<any>>(
-  needIgnoreFields?: string[]
+  needIgnoreFields?: string[] | ((fields: string[]) => string[])
 ): FormWrappedProps<T & IAntdFormHasErrorProps>
