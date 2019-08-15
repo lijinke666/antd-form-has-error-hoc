@@ -72,13 +72,7 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
 
     setFieldsStatus = () => {
       const {
-        form: {
-          validateFields,
-          getFieldsValue,
-          getFieldValue,
-          setFields,
-          getFieldsError
-        }
+        form: { validateFields, getFieldValue, setFields, getFieldsError }
       } = this.props
 
       const { lastFields } = this.state

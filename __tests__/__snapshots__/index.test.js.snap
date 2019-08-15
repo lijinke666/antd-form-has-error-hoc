@@ -1,0 +1,379 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`antd form create hoc test should get hasError from this.props 1`] = `
+<Form(WrappedComponent)>
+  <ForwardRef
+    form={
+      Object {
+        "getFieldDecorator": [Function],
+        "getFieldError": [Function],
+        "getFieldInstance": [Function],
+        "getFieldProps": [Function],
+        "getFieldValue": [Function],
+        "getFieldsError": [Function],
+        "getFieldsValue": [Function],
+        "isFieldTouched": [Function],
+        "isFieldValidating": [Function],
+        "isFieldsTouched": [Function],
+        "isFieldsValidating": [Function],
+        "isSubmitting": [Function],
+        "resetFields": [Function],
+        "setFields": [Function],
+        "setFieldsInitialValue": [Function],
+        "setFieldsValue": [Function],
+        "submit": [Function],
+        "validateFields": [Function],
+        "validateFieldsAndScroll": [Function],
+      }
+    }
+  >
+    <AntdFormHasError(Test)
+      form={
+        Object {
+          "getFieldDecorator": [Function],
+          "getFieldError": [Function],
+          "getFieldInstance": [Function],
+          "getFieldProps": [Function],
+          "getFieldValue": [Function],
+          "getFieldsError": [Function],
+          "getFieldsValue": [Function],
+          "isFieldTouched": [Function],
+          "isFieldValidating": [Function],
+          "isFieldsTouched": [Function],
+          "isFieldsValidating": [Function],
+          "isSubmitting": [Function],
+          "resetFields": [Function],
+          "setFields": [Function],
+          "setFieldsInitialValue": [Function],
+          "setFieldsValue": [Function],
+          "submit": [Function],
+          "validateFields": [Function],
+          "validateFieldsAndScroll": [Function],
+        }
+      }
+      forwardRef={null}
+    >
+      <Test
+        form={
+          Object {
+            "getFieldDecorator": [Function],
+            "getFieldError": [Function],
+            "getFieldInstance": [Function],
+            "getFieldProps": [Function],
+            "getFieldValue": [Function],
+            "getFieldsError": [Function],
+            "getFieldsValue": [Function],
+            "isFieldTouched": [Function],
+            "isFieldValidating": [Function],
+            "isFieldsTouched": [Function],
+            "isFieldsValidating": [Function],
+            "isSubmitting": [Function],
+            "resetFields": [Function],
+            "setFields": [Function],
+            "setFieldsInitialValue": [Function],
+            "setFieldsValue": [Function],
+            "submit": [Function],
+            "validateFields": [Function],
+            "validateFieldsAndScroll": [Function],
+          }
+        }
+        hasError={true}
+        updateFieldsStatus={[Function]}
+      >
+        <Form
+          colon={true}
+          hideRequiredMark={false}
+          layout="horizontal"
+          onSubmit={[Function]}
+        >
+          <form
+            className="ant-form ant-form-horizontal"
+            onSubmit={[Function]}
+          >
+            <FormItem
+              hasFeedback={false}
+            >
+              <Row
+                className="ant-form-item"
+                gutter={0}
+                key="row"
+              >
+                <div
+                  className="ant-row ant-form-item"
+                >
+                  <Col
+                    className="ant-form-item-control-wrapper"
+                  >
+                    <div
+                      className="ant-col ant-form-item-control-wrapper"
+                    >
+                      <div
+                        className="ant-form-item-control"
+                      >
+                        <span
+                          className="ant-form-item-children"
+                        >
+                          <Input
+                            data-__field={
+                              Object {
+                                "errors": null,
+                                "name": "username",
+                                "status": null,
+                                "touched": false,
+                                "value": undefined,
+                              }
+                            }
+                            data-__meta={
+                              Object {
+                                "name": "username",
+                                "originalProps": Object {
+                                  "placeholder": "Username",
+                                  "type": "text",
+                                },
+                                "ref": null,
+                                "rules": Array [
+                                  Object {
+                                    "message": "Please input your username!",
+                                    "required": true,
+                                  },
+                                ],
+                                "trigger": "onChange",
+                                "validate": Array [
+                                  Object {
+                                    "rules": Array [
+                                      Object {
+                                        "message": "Please input your username!",
+                                        "required": true,
+                                      },
+                                    ],
+                                    "trigger": Array [
+                                      "onChange",
+                                    ],
+                                  },
+                                ],
+                                "valuePropName": "value",
+                              }
+                            }
+                            id="username"
+                            onChange={[Function]}
+                            placeholder="Username"
+                            type="text"
+                          >
+                            <input
+                              className="ant-input"
+                              data-__field={
+                                Object {
+                                  "errors": null,
+                                  "name": "username",
+                                  "status": null,
+                                  "touched": false,
+                                  "value": undefined,
+                                }
+                              }
+                              data-__meta={
+                                Object {
+                                  "name": "username",
+                                  "originalProps": Object {
+                                    "placeholder": "Username",
+                                    "type": "text",
+                                  },
+                                  "ref": null,
+                                  "rules": Array [
+                                    Object {
+                                      "message": "Please input your username!",
+                                      "required": true,
+                                    },
+                                  ],
+                                  "trigger": "onChange",
+                                  "validate": Array [
+                                    Object {
+                                      "rules": Array [
+                                        Object {
+                                          "message": "Please input your username!",
+                                          "required": true,
+                                        },
+                                      ],
+                                      "trigger": Array [
+                                        "onChange",
+                                      ],
+                                    },
+                                  ],
+                                  "valuePropName": "value",
+                                }
+                              }
+                              id="username"
+                              onChange={[Function]}
+                              onKeyDown={[Function]}
+                              placeholder="Username"
+                              type="text"
+                              value=""
+                            />
+                          </Input>
+                        </span>
+                        <Animate
+                          animation={Object {}}
+                          component=""
+                          componentProps={Object {}}
+                          key="help"
+                          onAppear={[Function]}
+                          onEnd={[Function]}
+                          onEnter={[Function]}
+                          onLeave={[Function]}
+                          transitionAppear={true}
+                          transitionEnter={true}
+                          transitionLeave={true}
+                          transitionName="show-help"
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </div>
+              </Row>
+            </FormItem>
+            <FormItem
+              hasFeedback={false}
+            >
+              <Row
+                className="ant-form-item"
+                gutter={0}
+                key="row"
+              >
+                <div
+                  className="ant-row ant-form-item"
+                >
+                  <Col
+                    className="ant-form-item-control-wrapper"
+                  >
+                    <div
+                      className="ant-col ant-form-item-control-wrapper"
+                    >
+                      <div
+                        className="ant-form-item-control"
+                      >
+                        <span
+                          className="ant-form-item-children"
+                        >
+                          <Input
+                            data-__field={
+                              Object {
+                                "errors": null,
+                                "name": "password",
+                                "status": null,
+                                "touched": false,
+                                "value": undefined,
+                              }
+                            }
+                            data-__meta={
+                              Object {
+                                "name": "password",
+                                "originalProps": Object {
+                                  "placeholder": "Password",
+                                  "type": "password",
+                                },
+                                "ref": null,
+                                "rules": Array [
+                                  Object {
+                                    "message": "Please input your Password!",
+                                    "required": true,
+                                  },
+                                ],
+                                "trigger": "onChange",
+                                "validate": Array [
+                                  Object {
+                                    "rules": Array [
+                                      Object {
+                                        "message": "Please input your Password!",
+                                        "required": true,
+                                      },
+                                    ],
+                                    "trigger": Array [
+                                      "onChange",
+                                    ],
+                                  },
+                                ],
+                                "valuePropName": "value",
+                              }
+                            }
+                            id="password"
+                            onChange={[Function]}
+                            placeholder="Password"
+                            type="password"
+                          >
+                            <input
+                              className="ant-input"
+                              data-__field={
+                                Object {
+                                  "errors": null,
+                                  "name": "password",
+                                  "status": null,
+                                  "touched": false,
+                                  "value": undefined,
+                                }
+                              }
+                              data-__meta={
+                                Object {
+                                  "name": "password",
+                                  "originalProps": Object {
+                                    "placeholder": "Password",
+                                    "type": "password",
+                                  },
+                                  "ref": null,
+                                  "rules": Array [
+                                    Object {
+                                      "message": "Please input your Password!",
+                                      "required": true,
+                                    },
+                                  ],
+                                  "trigger": "onChange",
+                                  "validate": Array [
+                                    Object {
+                                      "rules": Array [
+                                        Object {
+                                          "message": "Please input your Password!",
+                                          "required": true,
+                                        },
+                                      ],
+                                      "trigger": Array [
+                                        "onChange",
+                                      ],
+                                    },
+                                  ],
+                                  "valuePropName": "value",
+                                }
+                              }
+                              id="password"
+                              onChange={[Function]}
+                              onKeyDown={[Function]}
+                              placeholder="Password"
+                              type="password"
+                              value=""
+                            />
+                          </Input>
+                        </span>
+                        <Animate
+                          animation={Object {}}
+                          component=""
+                          componentProps={Object {}}
+                          key="help"
+                          onAppear={[Function]}
+                          onEnd={[Function]}
+                          onEnter={[Function]}
+                          onLeave={[Function]}
+                          transitionAppear={true}
+                          transitionEnter={true}
+                          transitionLeave={true}
+                          transitionName="show-help"
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </div>
+              </Row>
+            </FormItem>
+          </form>
+        </Form>
+      </Test>
+    </AntdFormHasError(Test)>
+  </ForwardRef>
+</Form(WrappedComponent)>
+`;
