@@ -4,6 +4,7 @@ import { getDisplayName, xor, isEmpty, omit } from './utils'
 const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
   const AntdFormHasError = props => {
     const [filterFields, setFilterFields] = useState([])
+    const [lastFields, setLastFields] = useState([])
 
     const hasError = useMemo(() => {
       const {
@@ -31,29 +32,39 @@ const AntdFormHasErrorForFunction = needIgnoreFields => WrappedComponent => {
 
     const setFieldsStatus = useCallback(() => {
       const {
-        form: { validateFields, getFieldsValue, getFieldValue, setFields }
+        form: {
+          validateFields,
+          getFieldsValue,
+          getFieldValue,
+          setFields,
+          getFieldsError
+        }
       } = props
 
       const fields = Object.keys(getFieldsValue())
+      const fieldsError = getFieldsError()
 
-      validateFields(err => {
-        const filterFields = xor(fields, Object.keys(err || []))
-        setFilterFields(filterFields)
-
-        const allFields = {}
-        fields
+      validateFields(() => {
+        const filterFields = xor(fields, Object.keys(fieldsError || []))
+        const transformedFields = fields
           .filter(field => !filterFields.includes(field))
-          .forEach(field => {
+          .reduce((allFields, field) => {
             const value = getFieldValue(field)
+            const error = fieldsError[field]
+            const errors =
+              error && lastFields.includes(field) ? [new Error(error)] : null
+
             allFields[field] = {
               value,
-              errors: null,
+              errors,
               status: null,
               touched: !!value
             }
-          })
+          }, {})
 
-        setFields(allFields)
+        setFilterFields(filterFields)
+        setLastFields(fields)
+        setFields(transformedFields)
       })
     }, [])
 

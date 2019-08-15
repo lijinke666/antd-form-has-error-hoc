@@ -6,13 +6,15 @@ const PORT = 8082
 
 module.exports = env => {
   const mode = process.env.NODE_ENV
+  const isDev = mode === 'development'
   const options = {
     mode,
+    devtool: isDev && 'source-map',
     entry: path.join(__dirname, '../example/index'),
     output: {
       path: path.join(__dirname, '../example/dist'),
       filename: 'build.js',
-      publicPath: mode === 'development' ? '' : './example/dist/'
+      publicPath: isDev ? '' : './example/dist/'
     },
     //模块加载器
     module: {

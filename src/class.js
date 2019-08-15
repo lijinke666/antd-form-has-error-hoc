@@ -31,6 +31,7 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
     static displayName = `AntdFormHasError(${getDisplayName(WrappedComponent)})`
 
     state = {
+      lastFields: [],
       filterFields: []
     }
 
@@ -51,49 +52,64 @@ const AntdFormHasErrorForClass = needIgnoreFields => WrappedComponent => {
     }
     setFieldsStatus = () => {
       const {
-        form: { validateFields, getFieldsValue, getFieldValue, setFields }
+        form: {
+          validateFields,
+          getFieldsValue,
+          getFieldValue,
+          setFields,
+          getFieldsError
+        }
       } = this.props
 
-      const fields = Object.keys(getFieldsValue())
+      const { lastFields } = this.state
 
-      validateFields(err => {
-        const filterFields = xor(fields, Object.keys(err || []))
-        this.setState({
-          filterFields
-        })
-        const allFields = {}
-        fields
+      const fields = Object.keys(getFieldsValue())
+      const fieldsError = getFieldsError()
+
+      validateFields(() => {
+        const filterFields = xor(fields, Object.keys(fieldsError || []))
+        const transformedFields = fields
           .filter(field => !filterFields.includes(field))
-          .forEach(field => {
+          .reduce((allFields, field) => {
             const value = getFieldValue(field)
+            const error = fieldsError[field]
+            const errors =
+              error && lastFields.includes(field) ? [new Error(error)] : null
             allFields[field] = {
               value,
-              errors: null,
+              errors,
               status: null,
               touched: !!value
             }
-          })
+            return allFields
+          }, {})
 
-        setFields(allFields)
+        setFields(transformedFields)
+        this.setState({
+          lastFields: fields,
+          filterFields
+        })
       })
     }
 
     setDefaultFieldsValue = (
       defaultFieldsValue = this.props.defaultFieldsValue
     ) => {
-      const { form } = this.props
+      const {
+        form: { setFields }
+      } = this.props
       if (defaultFieldsValue) {
         const allFields = {}
         Object.keys(defaultFieldsValue).forEach(field => {
+          const value = defaultFieldsValue[field]
           allFields[field] = {
-            value: defaultFieldsValue[field],
+            value,
             errors: null,
             status: null,
-            touched: true
+            touched: !!value
           }
         })
-
-        form.setFields(allFields)
+        setFields(allFields)
       }
     }
     componentDidMount() {
